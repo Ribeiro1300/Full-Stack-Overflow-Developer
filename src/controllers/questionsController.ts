@@ -1,9 +1,23 @@
 import {Request,Response} from "express"
 import * as questionService from "../services/questionsService"
 
-async function newQuestion(req:Request,res:Response) {
-    res.send("olá")
+async function newQuestion(req:Request,res:Response){
+    try {
+        const {question, student,tags} = req.body
+        const className = req.body.class
     
+        const result = await questionService.newQuestion(question,student,className,tags)
+
+        if(!result){
+            res.sendStatus(404)
+        }
+
+        res.send(result)
+    } catch (error) {
+    console.log(error);
+    res.sendStatus(500)
+            
+    }
 }
 
 export {newQuestion}
