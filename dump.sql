@@ -16,6 +16,8 @@ CREATE TABLE "questions" (
 	"student" TEXT NOT NULL,
 	"class" TEXT NOT NULL,
 	"tags" TEXT NOT NULL,
+	"answered" BOOLEAN NOT NULL,
+	"submitAt" VARCHAR(255) NOT NULL,
 	CONSTRAINT "questions_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
