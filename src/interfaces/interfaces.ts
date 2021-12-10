@@ -7,6 +7,14 @@ interface Question {
   student: string;
   class: string;
   tags: string;
+  answered: boolean;
+  submitAt: string;
 }
 
-export { Id, Question };
+interface answeredQuestion extends Question {
+  answeredAt: string;
+  answeredBy: string;
+  answer: string;
+}
+
+export { Id, Question, answeredQuestion };
