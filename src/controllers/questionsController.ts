@@ -1,23 +1,27 @@
-import {Request,Response} from "express"
-import * as questionService from "../services/questionsService"
+import { Request, Response } from "express";
+import * as questionService from "../services/questionsService";
 
-async function newQuestion(req:Request,res:Response){
-    try {
-        const {question, student,tags} = req.body
-        const className = req.body.class
-    
-        const result = await questionService.newQuestion(question,student,className,tags)
+async function newQuestion(req: Request, res: Response) {
+  try {
+    const { question, student, tags } = req.body;
+    const className = req.body.class;
 
-        if(!result){
-            res.sendStatus(404)
-        }
+    const result = await questionService.newQuestion({
+      question: question,
+      student: student,
+      class: className,
+      tags: tags,
+    });
 
-        res.send(result)
-    } catch (error) {
-    console.log(error);
-    res.sendStatus(500)
-            
+    if (!result) {
+      res.sendStatus(404);
     }
+
+    res.send(result);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
 }
 
-export {newQuestion}
+export { newQuestion };

@@ -1,13 +1,11 @@
 import { QueryResult } from "pg";
 import connection from "../database/database";
-import { Id } from "../interfaces/interfaces";
+import { Id, Question } from "../interfaces/interfaces";
 
-async function newQuestion(
-  question: string,
-  student: string,
-  className: string,
-  tags: string
-): Promise<Id> {
+async function newQuestion(info: Question): Promise<Id> {
+  const { question, student, tags } = info;
+  const className = info.class;
+
   const result = await connection.query(
     "INSERT INTO questions (question,student,class,tags) VALUES ($1,$2,$3,$4);",
     [question, student, className, tags]

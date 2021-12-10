@@ -2,4 +2,11 @@ interface Id {
   id: number;
 }
 
-export { Id };
+interface Question {
+  question: string;
+  student: string;
+  class: string;
+  tags: string;
+}
+
+export { Id, Question };
