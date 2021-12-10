@@ -7,6 +7,9 @@ interface Question {
   student: string;
   class: string;
   tags: string;
+}
+
+interface CompleteQuestion extends Question {
   answered: boolean;
   submitAt: string;
 }
@@ -17,4 +20,15 @@ interface answeredQuestion extends Question {
   answer: string;
 }
 
-export { Id, Question, answeredQuestion };
+interface User {
+  name: string;
+  class: string;
+}
+
+interface UserToken extends User {
+  token: string;
+}
+interface Token {
+  token: string;
+}
+export { Id, Question, answeredQuestion, User, UserToken, Token, CompleteQuestion };
