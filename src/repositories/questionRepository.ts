@@ -1,8 +1,7 @@
-import { QueryResult } from "pg";
 import connection from "../database/database";
-import { answeredQuestion, Id, Question } from "../interfaces/interfaces";
+import { answeredQuestion, CompleteQuestion, Id, Question } from "../interfaces/interfaces";
 
-async function newQuestion(info: Question): Promise<Id> {
+async function newQuestion(info: CompleteQuestion): Promise<Id> {
   const { question, student, tags, answered, submitAt } = info;
   const className = info.class;
 
@@ -10,9 +9,8 @@ async function newQuestion(info: Question): Promise<Id> {
     `INSERT INTO questions (question,student,class,tags,answered,"submitAt") VALUES ($1,$2,$3,$4,$5,$6);`,
     [question, student, className, tags, answered, submitAt]
   );
-  if (!result) {
-    return null;
-  }
+
+  if (!result) return null;
 
   const currentId = await connection.query(
     "SELECT id FROM questions WHERE question=$1 AND student=$2 AND class = $3;",
@@ -30,7 +28,9 @@ async function getQuestionById(id: number): Promise<answeredQuestion | Question>
   if (!result.rows[0].answered) return result.rows[0];
 
   const fullResult = await connection.query(
-    `SELECT questions.*, answers."answeredAt",answers."answeredBy",answers.answer FROM questions JOIN answers ON questions.id = answers.question_id WHERE questions.id = $1;`,
+    `SELECT questions.*, answers."answeredAt",answers."answeredBy",answers.answer
+     FROM questions JOIN answers ON questions.id = answers.question_id
+      WHERE questions.id = $1;`,
     [id]
   );
   const answeredQuestion = fullResult.rows[0];

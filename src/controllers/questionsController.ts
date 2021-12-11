@@ -3,7 +3,7 @@ import * as questionService from "../services/questionsService";
 
 async function newQuestion(req: Request, res: Response) {
   try {
-    const { question, student, tags, answered, submitAt } = req.body;
+    const { question, student, tags } = req.body;
     const className = req.body.class;
 
     const result = await questionService.newQuestion({
@@ -11,8 +11,6 @@ async function newQuestion(req: Request, res: Response) {
       student: student,
       class: className,
       tags: tags,
-      answered: answered,
-      submitAt: submitAt,
     });
 
     if (!result) {
@@ -20,8 +18,8 @@ async function newQuestion(req: Request, res: Response) {
     }
 
     res.send(result);
-  } catch (error) {
-    console.log(error);
+  } catch (e) {
+    console.log(e);
     res.sendStatus(500);
   }
 }
