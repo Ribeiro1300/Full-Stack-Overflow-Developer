@@ -26,4 +26,22 @@ async function getQuestionById(id: number): Promise<answeredQuestion | Question>
   return result;
 }
 
-export { newQuestion, getQuestionById };
+async function answer(
+  question_id: number,
+  user_id: number,
+  answeredBy: string,
+  answer: string
+): Promise<boolean | string> {
+  const result = await questionRepository.answer({
+    question_id: question_id,
+    user_id: user_id,
+    answeredAt: dayjs().format("YYYY-MM-DD HH:mm"),
+    answeredBy: answeredBy,
+    answer: answer,
+  });
+  if (!result) return null;
+  if (result === "Questão já respondida!") return "Questão já respondida!";
+
+  return result;
+}
+export { newQuestion, getQuestionById, answer };

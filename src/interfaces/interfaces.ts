@@ -31,4 +31,13 @@ interface UserToken extends User {
 interface Token {
   token: string;
 }
-export { Id, Question, answeredQuestion, User, UserToken, Token, CompleteQuestion };
+
+interface answerInfo {
+  question_id: number;
+  user_id: number;
+  answeredAt: string;
+  answeredBy: string;
+  answer: string;
+}
+
+export { Id, Question, answeredQuestion, User, UserToken, Token, CompleteQuestion, answerInfo };

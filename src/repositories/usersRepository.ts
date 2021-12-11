@@ -1,5 +1,13 @@
+import { QueryResult } from "pg";
 import connection from "../database/database";
-import { UserToken } from "../interfaces/interfaces";
+import { Token, UserToken } from "../interfaces/interfaces";
+
+async function checkUser(token: Token) {
+  const session = await connection.query(`SELECT id,name FROM users WHERE token = $1;`, [
+    token.token,
+  ]);
+  return session.rows[0];
+}
 
 async function newUser(userInfo: UserToken): Promise<string> {
   const { name, token } = userInfo;
@@ -16,4 +24,4 @@ async function newUser(userInfo: UserToken): Promise<string> {
   return "Success";
 }
 
-export { newUser };
+export { newUser, checkUser };
