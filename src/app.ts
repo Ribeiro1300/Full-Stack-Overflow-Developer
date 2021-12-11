@@ -8,12 +8,13 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+app.get("/questions", questionController.getUnansweredQuestions);
 app.post("/questions", questionController.newQuestion);
 
 app.get("/questions/:id", questionController.getQuestionById);
 
-app.post("/users", userController.newUser);
-
 app.post("/questions/:id", auth, questionController.newAnswer);
+
+app.post("/users", userController.newUser);
 
 export default app;

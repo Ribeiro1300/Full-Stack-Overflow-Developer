@@ -13,22 +13,11 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": [ "jsx-a11y","@typescript-eslint"],
+  "plugins": ["@typescript-eslint"],
   "rules": {
-    "react/jsx-filename-extension": [
-      "error",
-      {
-        "extensions": [".js", ".jsx"]
-      }
-    ],
     "global-require": "off",
     "import/prefer-default-export": "off",
-    "no-unused-expressions": ["error", { "allowTaggedTemplates": true }],
-    "import/extensions": [
-        "error",
-        {
-            "js": "ignorePackages"
-        }
-       ]
+    "no-unused-expressions": [1, { "allowTaggedTemplates": true }]
+    
   }
 }
