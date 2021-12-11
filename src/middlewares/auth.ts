@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import * as usersRepository from "../repositories/usersRepository";
 
-async function auth(req: Request, res: Response, next: Function) {
+async function auth(req: Request, res: Response, next: any) {
   try {
     const authorization = req.headers["authorization"];
     const token = authorization?.split("Bearer ")[1];

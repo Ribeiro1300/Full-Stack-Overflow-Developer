@@ -36,6 +36,18 @@ async function getQuestionById(req: Request, res: Response) {
   }
 }
 
+async function getUnansweredQuestions(req: Request, res: Response) {
+  try {
+    const result = await questionService.getUnansweredQuestions();
+    if (!result) res.sendStatus(404);
+
+    res.send(result);
+  } catch (e) {
+    console.log(e);
+    res.sendStatus(500);
+  }
+}
+
 async function newAnswer(req: Request, res: Response) {
   try {
     const id = Number(req.params.id);
@@ -58,4 +70,4 @@ async function newAnswer(req: Request, res: Response) {
   }
 }
 
-export { newQuestion, getQuestionById, newAnswer };
+export { newQuestion, getQuestionById, newAnswer, getUnansweredQuestions };

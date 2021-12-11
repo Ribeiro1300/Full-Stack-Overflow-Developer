@@ -1,6 +1,7 @@
-import { Id, Question, answeredQuestion, CompleteQuestion } from "../interfaces/interfaces";
+import { Id, Question, answeredQuestion } from "../interfaces/interfaces";
 import * as questionRepository from "../repositories/questionRepository";
 import dayjs from "dayjs";
+import { QueryResult } from "pg";
 
 async function newQuestion(info: Question): Promise<Id> {
   const { question, student, tags } = info;
@@ -26,6 +27,11 @@ async function getQuestionById(id: number): Promise<answeredQuestion | Question>
   return result;
 }
 
+async function getUnansweredQuestions(): Promise<QueryResult[]> {
+  const result = await questionRepository.getUnansweredQuestions();
+  return result;
+}
+
 async function answer(
   question_id: number,
   user_id: number,
@@ -44,4 +50,4 @@ async function answer(
 
   return result;
 }
-export { newQuestion, getQuestionById, answer };
+export { newQuestion, getQuestionById, answer, getUnansweredQuestions };

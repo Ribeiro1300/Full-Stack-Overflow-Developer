@@ -45,13 +45,20 @@ async function getQuestionById(id: number): Promise<answeredQuestion | Question>
   return answeredQuestion;
 }
 
+async function getUnansweredQuestions(): Promise<QueryResult[]> {
+  const result = await connection.query(
+    `SELECT id,question,student,class,"submitAt" FROM questions WHERE answered = false;`
+  );
+  return result.rows;
+}
+
 async function answer(answerInfo: answerInfo): Promise<any> {
   const { question_id, user_id, answeredAt, answeredBy, answer } = answerInfo;
 
   const checkQuestion = await connection.query(`SELECT answered FROM questions WHERE id=$1;`, [
     question_id,
   ]);
-  
+
   if (checkQuestion.rows[0].answered) return "Questão já respondida!";
 
   await connection.query(`UPDATE questions SET answered = true WHERE id =$1`, [question_id]);
@@ -65,4 +72,4 @@ async function answer(answerInfo: answerInfo): Promise<any> {
 
   return result;
 }
-export { newQuestion, getQuestionById, answer };
+export { newQuestion, getQuestionById, answer, getUnansweredQuestions };

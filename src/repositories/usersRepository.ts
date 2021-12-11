@@ -1,4 +1,3 @@
-import { QueryResult } from "pg";
 import connection from "../database/database";
 import { Token, UserToken } from "../interfaces/interfaces";
 
