@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable no-unused-expressions */
 import { QueryResult } from "pg";
 import connection from "../database/database";
 import {
