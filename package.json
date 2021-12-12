@@ -8,6 +8,7 @@
     "start": "node dist/server.js",
     "postinstall": "npm run build",
     "lint": "eslint . --ext .ts",
+    "test":"npx jest",
     "dev": "npx nodemon --watch \"src/**\" --ext \"ts,json\" --exec \"ts-node src/server.ts\""
   },
   "keywords": [],
