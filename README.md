@@ -98,7 +98,7 @@ or
         "answer": "Óbvio!"
     }
 
-## Post an answer to a question using the question's id.
+## Post an answer to a question using the id.
 
 ### Request
 
